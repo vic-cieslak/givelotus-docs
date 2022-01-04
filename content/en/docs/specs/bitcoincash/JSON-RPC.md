@@ -1,6 +1,7 @@
 ---
 title: BCH JSON RPC Specification ⚠️ out of date ⚠️
 date: 2018-05-15
+category: Bitcoin Cash
 activation: 1501590000
 version: 0.2
 ---

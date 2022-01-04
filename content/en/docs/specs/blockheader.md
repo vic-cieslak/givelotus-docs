@@ -1,6 +1,7 @@
 ---
 title: "Block Header"
 linkTitle: "Block Header"
+category: Specification
 weight: 70
 ---
 

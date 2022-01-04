@@ -1,6 +1,7 @@
 ---
 title: "Taproot"
 linkTitle: "Taproot"
+category: Script
 weight: 70
 ---
 

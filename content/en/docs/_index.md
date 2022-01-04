@@ -8,7 +8,7 @@ menu:
     weight: 70
 ---
 
-{{% pageinfo %}}
+
 This is the home of the Lotus technical documentation
-{{% /pageinfo %}}
+
 

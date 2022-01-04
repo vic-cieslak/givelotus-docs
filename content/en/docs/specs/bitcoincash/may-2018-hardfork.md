@@ -1,6 +1,7 @@
 ---
 title: May 2018 Hardfork Specification
 date: 2018-04-09
+category: Bitcoin Cash
 activation: 1526400000
 version: 1.1
 ---

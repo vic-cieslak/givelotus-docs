@@ -1,6 +1,7 @@
 ---
 title: OP_CHECKDATASIG and OP_CHECKDATASIGVERIFY Specification
 date: 2018-08-20
+category: Bitcoin Cash
 activation: 1542300000
 version: 0.6
 ---

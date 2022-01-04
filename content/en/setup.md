@@ -5,8 +5,7 @@ position: 2
 category: Guide
 ---
 
-Check the [Nuxt.js documentation](https://nuxtjs.org/guides/configuration-glossary/configuration-modules) for more information about installing and using modules in Nuxt.js.
-asdada
+Here should be a description of setting up development environment for Lotus.
 ## Installation
 
 Add `@nuxtjs/xxx` dependency to your project:

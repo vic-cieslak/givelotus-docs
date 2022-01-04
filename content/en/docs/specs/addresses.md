@@ -1,6 +1,7 @@
 ---
 title: "Address Format"
 linkTitle: "Address Format"
+category: Specification
 weight: 60
 ---
 
@@ -14,7 +15,7 @@ Currently, Bitcoin Cash, and Bitcoin ABC, from which Lotus is dervived, use the 
 4. The payload includes a version byte which is encodes a size as well as a type.
     * This results in potentially nonsensical combinations such as P2SH with size 32 instead of 20. If this were supported in the future, wallets would need to implement this as a separate type of output. This causes implementations to branch on both the size and the type in order to determine the output time.
     * The sizes available per the specification only support certain commitment sizes. For a taproot address w/ commitment 65 bytes is needed which is not supported.
-5. Because the prefix is optional - but also included in the checksum - it requires wallets to provide a default prefix that must change based on the network it is running on. This conflates the token type with the network and requires a mapping table for different networks of the same coin. (e.g. `bchtest` vs `bitcoincash` vs `ecash`). It also means that a general address translator for converting a testnet address to a mainnet address must guess the network and try repeated 
+5. Because the prefix is optional - but also included in the checksum - it requires wallets to provide a default prefix that must change based on the network it is running on. This conflates the token type with the network and requires a mapping table for different networks of the same coin. (e.g. `bchtest` vs `bitcoincash` vs `ecash`). It also means that a general address translator for converting a testnet address to a mainnet address must guess the network and try repeated
 
 Due to the following weaknesses above, and the need to fork the libraries and modify the cashaddr specification. The type byte would need to be modified to support additional sizes, as well as implementing a new address type in Lotus-supporting wallets. Additionally, if new address types were added, all wallets would need to be updated to support it.
 

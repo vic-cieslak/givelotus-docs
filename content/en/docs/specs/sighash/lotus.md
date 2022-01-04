@@ -1,6 +1,7 @@
 ---
 title: "SigHash Lotus"
 linkTitle: "SigHash Lotus"
+category: SigHash
 weight: 100
 ---
 

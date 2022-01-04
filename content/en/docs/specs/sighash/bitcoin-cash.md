@@ -2,6 +2,7 @@
 title: "SigHash BCH (BIP143 variant)"
 linkTitle: "SigHash BCH"
 weight: 110
+category: SigHash
 date: 2017-07-16
 activation: 1501590000
 version: 1.2

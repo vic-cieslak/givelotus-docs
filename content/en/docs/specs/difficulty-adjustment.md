@@ -3,6 +3,7 @@ title: ASERT Difficulty Adjustment Algorithm (aserti3-2d)
 linkTitle: "Difficulty Adjustment Algorithm"
 weight: 110
 date: 2020-08-17
+category: Specification
 activation: 1605441600
 version: 0.6.3
 author: freetrader, Jonathan Toomim, Calin Culianu, Mark Lundeberg, Tobias Ruck

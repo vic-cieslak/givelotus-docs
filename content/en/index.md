@@ -4,7 +4,7 @@ description: 'This is the home of the Lotus technical documentation'
 position: 1
 category: ''
 features:
-  - Feature 32
+  - Link
   - Feature 2
   - Feature 3
 ---
@@ -22,8 +22,8 @@ Your documentation has been created successfully!
 
 </alert> -->
 
-## Features
+<!-- ## Features
 
-<list :items="features"></list>
+<list :items="features"></list> -->
 
 <p class="flex items-center">Enjoy light and dark mode:&nbsp;<app-color-switcher class="inline-flex ml-2"></app-color-switcher></p>

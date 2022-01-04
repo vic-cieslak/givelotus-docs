@@ -1,6 +1,7 @@
 ---
 title: "Transaction IDs"
 linkTitle: "Transaction IDs"
+category: Specification
 weight: 90
 ---
 

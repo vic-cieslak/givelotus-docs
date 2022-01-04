@@ -1,6 +1,7 @@
 ---
 title: "Bitwise Logic"
 linkTitle: "Bitwise"
+category: Script
 weight: 20
 ---
 
@@ -34,7 +35,7 @@ Unit tests:
 Boolean *or* between each bit in the operands.
 
 	x1 x2 OP_OR -> out
-	
+
 The operator must fail if:
 1. `len(x1) != len(x2)`. The two operands must be the same size.
 
@@ -53,7 +54,7 @@ Unit tests:
 Boolean *xor* between each bit in the operands.
 
 	x1 x2 OP_XOR -> out
-	
+
 The operator must fail if:
 1. `len(x1) != len(x2)`. The two operands must be the same size.
 

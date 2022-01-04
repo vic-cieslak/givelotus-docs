@@ -2,6 +2,7 @@
 title: 2019-MAY-15 Segwit Recovery Specification
 date: 2019-05-13
 activation: 1557921600
+category: Bitcoin Cash
 version: 0.4
 ---
 

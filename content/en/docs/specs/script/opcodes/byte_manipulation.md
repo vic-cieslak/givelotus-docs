@@ -2,6 +2,7 @@
 title: Byte Manipulation
 date: 2019-05-29
 activation: 1589544000
+category: Script
 version: 0.2
 author: Tobias Ruck, Steve Shadders, Daniel Connolly
 ---
@@ -16,10 +17,10 @@ author: Tobias Ruck, Steve Shadders, Daniel Connolly
 Concatenates two operands.
 
     x1 x2 OP_CAT -> out
-        
+
 Examples:
 * `{Ox11} {0x22, 0x33} OP_CAT -> 0x112233`
-    
+
 The operator must fail if `len(out) > MAX_SCRIPT_ELEMENT_SIZE`. The operation cannot output elements that violate the constraint on the element size.
 
 Note that the concatenation of a zero length operand is valid.
@@ -28,18 +29,18 @@ Impact of successful execution:
 * stack memory use is constant
 * number of elements on stack is reduced by one
 
-The limit on the length of the output prevents the memory exhaustion attack and results in the operation having less 
+The limit on the length of the output prevents the memory exhaustion attack and results in the operation having less
 impact on stack size than existing OP_DUP operators.
 
 Unit tests:
-1. `maxlen_x y OP_CAT -> failure`. Concatenating any operand except an empty vector, including a single byte value 
+1. `maxlen_x y OP_CAT -> failure`. Concatenating any operand except an empty vector, including a single byte value
    (e.g. `OP_1`), onto a maximum sized array causes failure
-3. `large_x large_y OP_CAT -> failure`. Concatenating two operands, where the total length is greater than 
+3. `large_x large_y OP_CAT -> failure`. Concatenating two operands, where the total length is greater than
    `MAX_SCRIPT_ELEMENT_SIZE`, causes failure
 4. `OP_0 OP_0 OP_CAT -> OP_0`. Concatenating two empty arrays results in an empty array
-5. `x OP_0 OP_CAT -> x`. Concatenating an empty array onto any operand results in the operand, including when 
+5. `x OP_0 OP_CAT -> x`. Concatenating an empty array onto any operand results in the operand, including when
    `len(x) = MAX_SCRIPT_ELEMENT_SIZE`
-6. `OP_0 x OP_CAT -> x`. Concatenating any operand onto an empty array results in the operand, including when 
+6. `OP_0 x OP_CAT -> x`. Concatenating any operand onto an empty array results in the operand, including when
    `len(x) = MAX_SCRIPT_ELEMENT_SIZE`
 7. `x y OP_CAT -> concat(x,y)`. Concatenating two operands generates the correct result
 
@@ -68,12 +69,12 @@ Notes:
 simulated with varying combinations of `OP_SPLIT`, `OP_SWAP` and `OP_DROP`.  This is in keeping with the minimalist philosophy where a single
 primitive can be used to simulate multiple more complex operations.
 * `x` is split at position `n`, where `n` is the number of bytes from the beginning
-* `x1` will be the first `n` bytes of `x` and `x2` will be the remaining bytes 
+* `x1` will be the first `n` bytes of `x` and `x2` will be the remaining bytes
 * if `n == 0`, then `x1` is the empty array and `x2 == x`
 * if `n == len(x)` then `x1 == x` and `x2` is the empty array.
 * if `n > len(x)`, then the operator must fail.
 * `x n OP_SPLIT OP_CAT -> x`, for all `x` and for all `0 <= n <= len(x)`
-    
+
 The operator must fail if:
 * `!isnum(n)`. Fail if `n` is not a numeric value.
 * `n < 0`. Fail if `n` is negative.
@@ -92,11 +93,11 @@ Unit tests:
 
 ## Bitwise logic
 
-The bitwise logic operators expect 'byte sequence' operands. The operands must be the same length. 
+The bitwise logic operators expect 'byte sequence' operands. The operands must be the same length.
 * In the case of 'byte sequence' operands `OP_CAT` can be used to pad a shorter byte sequence to an appropriate length.
-* In the case of 'byte sequence' operands where the length of operands is not known until runtime a sequence of 0x00 bytes 
+* In the case of 'byte sequence' operands where the length of operands is not known until runtime a sequence of 0x00 bytes
   (for use with `OP_CAT`) can be produced using `OP_0 n OP_NUM2BIN`
-* In the case of numeric value operands `x n OP_NUM2BIN` can be used to pad a numeric value to length `n` whilst preserving 
+* In the case of numeric value operands `x n OP_NUM2BIN` can be used to pad a numeric value to length `n` whilst preserving
   the sign bit.
 
 ### OP_AND
@@ -131,7 +132,7 @@ Unit tests:
 Boolean *or* between each bit in the operands.
 
 	x1 x2 OP_OR -> out
-	
+
 The operator must fail if:
 1. `len(x1) != len(x2)`. The two operands must be the same size.
 
@@ -151,7 +152,7 @@ Unit tests:
 Boolean *xor* between each bit in the operands.
 
 	x1 x2 OP_XOR -> out
-	
+
 The operator must fail if:
 1. `len(x1) != len(x2)`. The two operands must be the same size.
 
@@ -162,12 +163,12 @@ Impact of successful execution:
 Unit tests:
 1. `x1 x2 OP_XOR -> failure`, where `len(x1) != len(x2)`. The two operands must be the same size.
 2. `x1 x2 OP_XOR -> x1 xor x2`. Check valid results.
-    
+
 ## Arithmetic
 
 #### Note about canonical form and floor division
 
-Operands for all arithmetic operations are assumed to be numeric values and must be in canonical form.  
+Operands for all arithmetic operations are assumed to be numeric values and must be in canonical form.
 See [data types](#data-types) for more information.
 
 **Floor division**
@@ -185,13 +186,13 @@ rules.  Namely:
 
     Opcode (decimal): 150
     Opcode (hex): 0x96
-    
+
 Return the integer quotient of `a` and `b`.  If the result would be a non-integer it is rounded *towards* zero.
 
     a b OP_DIV -> out
-    
+
     where a and b are interpreted as numeric values
-    
+
 The operator must fail if:
 1. `!isnum(a) || !isnum(b)`. Fail if either operand is not a numeric value.
 1. `b == 0`. Fail if `b` is equal to any type of zero.
@@ -202,22 +203,22 @@ Impact of successful execution:
 
 Unit tests:
 1. `a b OP_DIV -> failure` where `!isnum(a)` or `!isnum(b)`. Both operands must be numeric values
-2. `a 0 OP_DIV -> failure`. Division by positive zero (all sizes), negative zero (all sizes), `OP_0` 
+2. `a 0 OP_DIV -> failure`. Division by positive zero (all sizes), negative zero (all sizes), `OP_0`
 3. `27 7 OP_DIV -> 3`, `27 -7 OP_DIV -> -3`, `-27 7 OP_DIV -> -3`, `-27 -7 OP_DIV -> 3`. Check negative operands.
   *Pay attention to sign*.
 4. check valid results for operands of different lengths `0..4`
-    
+
 ### OP_MOD
 
     Opcode (decimal): 151
     Opcode (hex): 0x97
 
-Returns the remainder after dividing a by b.  The output will be represented using the least number of bytes required. 
+Returns the remainder after dividing a by b.  The output will be represented using the least number of bytes required.
 
 	a b OP_MOD -> out
-	
+
 	where a and b are interpreted as numeric values
-	
+
 The operator must fail if:
 1. `!isnum(a) || !isnum(b)`. Fail if either operand is not a numeric value.
 1. `b == 0`. Fail if `b` is equal to any type of zero.
@@ -228,7 +229,7 @@ Impact of successful execution:
 
 Unit tests:
 1. `a b OP_MOD -> failure` where `!isnum(a)` or `!isnum(b)`. Both operands must be numeric values.
-2. `a 0 OP_MOD -> failure`. Division by positive zero (all sizes), negative zero (all sizes), `OP_0` 
+2. `a 0 OP_MOD -> failure`. Division by positive zero (all sizes), negative zero (all sizes), `OP_0`
 3. `27 7 OP_MOD -> 6`, `27 -7 OP_MOD -> 6`, `-27 7 OP_MOD -> -6`, `-27 -7 OP_MOD -> -6`. Check negative operands.
   *Pay attention to sign*.
 4. check valid results for operands of different lengths `0..4` and returning result zero
@@ -245,7 +246,7 @@ Convert the numeric value into a byte sequence of a certain size, taking account
 The byte sequence produced uses the little-endian encoding.
 
     a b OP_NUM2BIN -> x
-    
+
 where `a` and `b` are interpreted as numeric values. `a` is the value to be converted to a byte sequence,
 it can be up to `MAX_SCRIPT_ELEMENT_SIZE` long and does not need to be minimally encoded.
 `b` is the desired size of the result, it must be minimally encoded and <= 4 bytes long. It must be possible for the
@@ -289,7 +290,7 @@ See also `OP_NUM2BIN`.
 
 Notes:
 * if `a` is any form of zero, including negative zero, then `OP_0` must be the result
-    
+
 Examples:
 * `{0x02, 0x00, 0x00, 0x00, 0x00} OP_BIN2NUM -> 2`. `0x0200000000` in little-endian encoding has value 2.
 * `{0x05, 0x00, 0x80} OP_BIN2NUM -> -5` - `0x050080` in little-endian encoding has value -5.
@@ -302,10 +303,10 @@ Impact of successful execution:
 * the number of elements on the stack remains constant
 
 Unit tests:
-1. `a OP_BIN2NUM -> failure`, when `a` is a byte sequence whose numeric value is too large to fit into the numeric value 
-    type, for both positive and negative values. 
+1. `a OP_BIN2NUM -> failure`, when `a` is a byte sequence whose numeric value is too large to fit into the numeric value
+    type, for both positive and negative values.
 2. `{0x00} OP_BIN2NUM -> OP_0`. Byte sequences, of various lengths, consisting only of zeros should produce an OP_0 (zero
-    length array). 
+    length array).
 3. `{0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00} OP_BIN2NUM -> 1`. A large byte sequence, whose numeric value would fit in the numeric value
     type, is a valid operand.
 4. The same test as above, where the length of the input byte sequence is equal to MAX_SCRIPT_ELEMENT_SIZE.
@@ -313,7 +314,7 @@ Unit tests:
 6. `{0x80} OP_BIN2NUM -> OP_0`. Negative zero, in a byte sequence, should produce zero.
 7. `{0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80} OP_BIN2NUM -> OP_0`. Large negative zero, in a byte sequence, should produce zero.
 8. other valid parameters with various results
- 
+
 ## Misc Operations
 
 ### OP_REVERSEBYTES
@@ -370,7 +371,7 @@ OP_NUM2BIN       // <SLP value 4-byte little endian>
 OP_REVERSEBYTES  // <SLP value 4-byte big endian>
 ```
 
-That's 11 bytes (9 operations and 3 pushdata) saved. 
+That's 11 bytes (9 operations and 3 pushdata) saved.
 
 There are multiple reasons why the second version would be preferable:
 
@@ -408,7 +409,7 @@ Examples:
 
 #### Opcode Number
 
-OP_REVERSEBYTES proposes to use the previously unused opcode with number 188 (0xbc in hex encoding), which comes after the most recently added opcode, `OP_CHECKDATASIGVERIFY`. 
+OP_REVERSEBYTES proposes to use the previously unused opcode with number 188 (0xbc in hex encoding), which comes after the most recently added opcode, `OP_CHECKDATASIGVERIFY`.
 
 #### Unit Tests
 

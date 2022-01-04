@@ -1,6 +1,7 @@
 ---
 title: "Block Reward"
 linkTitle: "Block Reward"
+category: Specification
 weight: 80
 ---
 
@@ -37,7 +38,7 @@ efficiency. Increases in mining efficiency, historically have been exponential,
 by taking the log of the difficulty, efficiency increases are linearized and
 represent a fixed multiple of the base 260 megasats. Over time, the base reward
 will become an insignificant amount of the total coins in circulation making
-lotus inflationary, but at an ever decreasing percentage. 
+lotus inflationary, but at an ever decreasing percentage.
 
 However, the reward will also adjust on short timescales to changes in price.
 The impact of this is that there is some effect on token supply in order to

@@ -1,5 +1,6 @@
 ---
 title: Lokad 4-byte prefix guideline for OP_RETURN on Bitcoin Cash
+category: Bitcoin Cash
 date: 2018-05-23
 authors: Joannes Vermorel (Lokad), Amaury Séchet (Bitcoin ABC), Shammah Chancellor (Bitcoin ABC), May 23rd, 2018 (revised November 2018)
 ---
@@ -10,7 +11,7 @@ _In the following, Bitcoin always refers to Bitcoin Cash._
 
 ## Overview
 
-Following the May 15th, 2018 upgrade of Bitcoin, the ecosystem has gained renewed interest for overlay protocols built on top of the blockchain, leveraging the new capacity at 223 bytes of the OP_RETURN opcode of Bitcoin. However, it appears that protocols that are presently emerging and that are gaining market traction are not systematically prefixing their messages carried through OP_RETURN, which represents the simplest option to sort messages according to their respective protocols. 
+Following the May 15th, 2018 upgrade of Bitcoin, the ecosystem has gained renewed interest for overlay protocols built on top of the blockchain, leveraging the new capacity at 223 bytes of the OP_RETURN opcode of Bitcoin. However, it appears that protocols that are presently emerging and that are gaining market traction are not systematically prefixing their messages carried through OP_RETURN, which represents the simplest option to sort messages according to their respective protocols.
 
 As a result, unless the Bitcoin community rapidly agrees to a unifying scheme, as the usage of OP_RETURN grows, the collisions between protocols will multiply. While none of those collisions endanger Bitcoin itself, they will significantly and needlessly complicate the design of the software intended to operate those overlay protocols.
 
@@ -56,7 +57,7 @@ See also _Annex: file format of /etc/protocols.csv_
 
 ## Why 4-byte
 
-The value of **4** bytes has been chosen as a tradeoff between the blockchain data overhead and the number of distinct protocols supported by the prefixing scheme. 
+The value of **4** bytes has been chosen as a tradeoff between the blockchain data overhead and the number of distinct protocols supported by the prefixing scheme.
 
 * With 4-byte prefixes, taking into account the 4 restricted bits, Bitcoin supports over 260+ million distinct protocols. Realistically, Bitcoin will never run out of identifiers for protocols.
 * The footprint overhead is low (2 to 5 bytes out of 223), so this guideline has minimal impact on the overall usability of OP_RETURN.
@@ -70,7 +71,7 @@ Furthermore, by sticking to this guideline, you can expect a degree of support f
 Any OP_RETURN protocol should be resilient to adversarial behaviors where participants can be expected to push garbage to the blockchain. However, there is a big difference between:
 
 * regular adversaries pushing garbage in your direction.
-* having the next large social network generating collisions in your direction. 
+* having the next large social network generating collisions in your direction.
 
 Adversaries have to pay transaction fees to garbage your protocol which is not an economically efficient form of attack. However, the next large social network might _profitably_ collide with your protocol while doing it _at scale_.
 
@@ -84,13 +85,13 @@ If you do not abide to this guideline - _we don’t force you_ - be aware that y
 
 ## Annex: file format of /etc/protocols.csv
 
-In order to make known protocols easily available to the community at large, a simple file format is proposed to gather the protocol prefixes, following a pattern essentially similar to `/etc/services` which exists in Linux distributions. 
+In order to make known protocols easily available to the community at large, a simple file format is proposed to gather the protocol prefixes, following a pattern essentially similar to `/etc/services` which exists in Linux distributions.
 
 This file `protocols.csv` should be seen as an early stage effort to help various protocols gain traction within the Bitcoin community. If the number of active protocols becomes greater than a few hundred, we expect that the file `protocols.csv` will be superseded with an approach more scalable than having a flat text file holding all known protocols.
 
 The URL for the file is expected to be:
 
-https://github.com/bitcoincashorg/bitcoincash.org/blob/master/etc/protocols.csv 
+https://github.com/bitcoincashorg/bitcoincash.org/blob/master/etc/protocols.csv
 
 The file is encoded in CSV as per [RFC 4180](https://tools.ietf.org/html/rfc4180) with the following options:
 

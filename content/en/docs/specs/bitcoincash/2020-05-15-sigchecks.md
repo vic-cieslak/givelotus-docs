@@ -1,6 +1,7 @@
 ---
 title: 2020-MAY-15 script SigChecks counting and limiting specification
 date: 2020-03-05
+category: Bitcoin Cash
 activation: 1589544000
 version: 0.2 (DRAFT)
 author: Mark B. Lundeberg

@@ -2,6 +2,7 @@
 title: Check Data Sig Specification
 linkTitle: Check Data Sig
 date: 2018-08-20
+category: Script
 activation: 1542300000
 version: 0.6
 ---

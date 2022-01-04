@@ -2,6 +2,7 @@
 title: 2018 November 15 Network Upgrade Specification
 date: 2018-10-10
 activation: 1542300000
+category: Bitcoin Cash
 version: 0.5
 ---
 
