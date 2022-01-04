@@ -1,10 +1,10 @@
 ---
 title: Introduction
-description: ''
+description: 'This is the home of the Lotus technical documentation'
 position: 1
 category: ''
 features:
-  - Feature 1
+  - Feature 32
   - Feature 2
   - Feature 3
 ---
@@ -12,13 +12,15 @@ features:
 <img src="/preview.png" class="light-img" width="1280" height="640" alt=""/>
 <img src="/preview-dark.png" class="dark-img" width="1280" height="640" alt=""/>
 
-[Module]() for [NuxtJS](https://nuxtjs.org).
+<!-- [Module]() for [NuxtJS](https://nuxtjs.org). -->
 
-<alert type="success">
+This is the home of the Lotus technical documentation
+
+<!-- <alert type="success">
 
 Your documentation has been created successfully!
 
-</alert>
+</alert> -->
 
 ## Features
 
