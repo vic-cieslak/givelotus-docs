@@ -1,5 +1,7 @@
 # givelotus-docs
 
+live demo: https://givelotusdocs.netlify.app/
+
 ## Setup
 
 Install dependencies:
